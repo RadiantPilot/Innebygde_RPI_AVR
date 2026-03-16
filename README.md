@@ -34,7 +34,7 @@
 Meldinger pakkes i `<` `>` med kommaseparerte verdier:
 
 ```
-<L,nr,on_off>     LED-styring         <L,2,1>  → slå på LED 2
+<L,nr,on_off>      LED-styring         <L,2,1>  → slå på LED 2
 <S,vinkel>         Servo-posisjon      <S,90>   → sett servo til 90°
 <M,0>              ADC-lesing          <M,0>    → les analog verdi
 ```
@@ -45,7 +45,7 @@ Meldinger pakkes i `<` `>` med kommaseparerte verdier:
 
 ```
 .
-├── main_avr_fixed.c      # AVR firmware – kommandoparser + HW-styring
+├── main_avr_fixed.c       # AVR firmware – kommandoparser + HW-styring
 ├── gui_io_kort_v2.py      # RPi GUI – customtkinter + matplotlib
 └── README.md
 ```
@@ -54,11 +54,11 @@ Meldinger pakkes i `<` `>` med kommaseparerte verdier:
 
 ### Forutsetninger
 
-| Komponent | Krav |
-|-----------|------|
-| Raspberry Pi | Raspbian OS, Python 3.x |
-| AVR | AVR128DB (32-pin TQFP), UPDI-programmer |
-| Tilkobling | USART krysskobling + felles GND |
+| Komponent    | Krav                                    |
+|--------------|-----------------------------------------|
+| Raspberry Pi | Raspbian OS, Python 3.x                 |
+| AVR          | AVR128DB (32-pin TQFP), UPDI-programmer |
+| Tilkobling   | USART krysskobling + felles GND         |
 
 ### 1. Installer avhengigheter (RPi)
 
