@@ -1,0 +1,4 @@
+1) lag programmet som vanlig med nano eller hva som helst: nano program.c
+2) Kompilering: gcc program.c -o program_en
+3) chmod +x program_en
+4) ./program_en
