@@ -68,11 +68,7 @@ pip3 install customtkinter matplotlib pyserial --break-system-packages
 
 ### 2. Flash AVR
 
-Kompiler og last opp med `avr-gcc` + `avrdude` via UPDI:
-```bash
-avr-gcc -mmcu=avr128db32 -O2 -DF_CPU=4000000UL -o main.elf main_avr_fixed.c
-avrdude -c serialupdi -p avr128db32 -P /dev/ttyUSB0 -U flash:w:main.elf
-```
+Kompiler, koble til ledning og last opp via Microchip Studio
 
 ### 3. Koble opp
 
@@ -85,7 +81,7 @@ avrdude -c serialupdi -p avr128db32 -P /dev/ttyUSB0 -U flash:w:main.elf
 ### 4. Kjør
 
 ```bash
-python3 gui_io_kort_v2.py
+python3 Oppg_7_GUI_V2.py
 ```
 
 > 💡 Starter automatisk i **demo-modus** hvis seriellporten ikke er tilgjengelig.
