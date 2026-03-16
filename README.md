@@ -21,10 +21,10 @@
 ```
 ┌──────────────────┐                          ┌──────────────────────┐
 │   RASPBERRY PI   │    USART · 9600 baud     │     AVR128DB MCU     │
-│                  │    ◄───────────────────►  │                      │
+│                  │    ◄───────────────────► │                      │
 │  ┌────────────┐  │    TX (GPIO14) → RX(PF5) │  LED 0-3    (PC0-3)  │
-│  │ Python GUI │  │    RX (GPIO15) ← TX(PF4) │  Servo PWM  (PE0)   │
-│  │ ctk + mpl  │  │    GND ──────── GND      │  ADC 12-bit (PD0)   │
+│  │ Python GUI │  │    RX (GPIO15) ← TX(PF4) │  Servo PWM  (PE0)    │
+│  │ ctk + mpl  │  │    GND ──────── GND      │  ADC 12-bit (PD0)    │
 │  └────────────┘  │                          │                      │
 └──────────────────┘                          └──────────────────────┘
 ```
