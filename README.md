@@ -8,7 +8,6 @@
 ![MCU](https://img.shields.io/badge/MCU-AVR128DB-0066cc?logo=microchip&logoColor=white)
 ![Language](https://img.shields.io/badge/GUI-Python%203-3776ab?logo=python&logoColor=white)
 ![Language](https://img.shields.io/badge/firmware-C-00599c?logo=c&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 *Styring av AVR-basert IO-kort fra Raspberry Pi via USART med live GUI*  
 
