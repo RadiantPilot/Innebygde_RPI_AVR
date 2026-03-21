@@ -1,4 +1,6 @@
 """
+Denne koden er skrevet i tråd med UiT sitt KI nivå 4
+
 GUI for styring av IO-kort (AVR) via USART fra Raspberry Pi.
 Oppgave 7 – AUT-2606 Innebygde Systemer (oppgradert)
 
