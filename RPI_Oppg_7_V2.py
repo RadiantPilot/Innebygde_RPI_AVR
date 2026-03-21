@@ -99,7 +99,7 @@ class App(ctk.CTk):
 
         for i in range(4):
             btn = ctk.CTkButton(
-                btn_frame, text=f"LED {i}\nAV", width=90, height=50,
+                btn_frame, text=f"LED {i}\nav", width=90, height=50,
                 fg_color="gray30",
                 command=lambda idx=i: self._toggle_led(idx)
             )
@@ -154,7 +154,7 @@ class App(ctk.CTk):
     def _oppdater_led_btn(self, idx):
         on = self.leds[idx].state
         self.led_btns[idx].configure(
-            text=f"LED {idx}\n{'PÅ' if on else 'AV'}",
+            text=f"LED {idx}\n{'på' if on else 'av'}",
             fg_color="green" if on else "gray30"
         )
 
@@ -288,7 +288,7 @@ class App(ctk.CTk):
         btn_frame.pack(pady=4)
 
         ctk.CTkButton(
-            btn_frame, text="Les én gang", width=110,
+            btn_frame, text="Les en gang", width=110,
             command=self._les_adc
         ).grid(row=0, column=0, padx=5)
 

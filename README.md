@@ -11,6 +11,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 *Styring av AVR-basert IO-kort fra Raspberry Pi via USART med live GUI*
+*Skrevet i tråd med UiT sitt KI nivå 4*
 
 </div>
 
@@ -102,7 +103,7 @@ python3 RPI_Oppg_7_V2.py
 ## 🔧 Endringer fra original kode
 
 <details>
-<summary><b>Servo — bare 90° bevegelse</b></summary>
+<summary><b>Servo — øker fra 90° bevegelse til 180</b></summary>
 
 Originale verdier `SERVO_MIN=62`, `SERVO_MAX=125` ga pulser 1.0–2.0ms.
 Mange servoer trenger 0.5–2.5ms for fulle 180°.
@@ -159,6 +160,6 @@ uint16_t ADC0_read(void) {
 
 <div align="center">
 
-Laget som del av lab 7/8 i **AUT-2606** · UiT Norges Arktiske Universitet
+Laget som del innlevering 8 i **AUT-2606** · UiT Norges Arktiske Universitet
 
 </div>
