@@ -45,8 +45,10 @@ Meldinger pakkes i `<` `>` med kommaseparerte verdier:
 
 ```
 .
-├── main_avr_fixed.c       # AVR firmware – kommandoparser + HW-styring
-├── gui_io_kort_v2.py      # RPi GUI – customtkinter + matplotlib
+├── main.c                 # AVR firmware – kommandoparser + HW-styring
+├── RPI_Oppg_7_V2.py       # RPi GUI – customtkinter + matplotlib
+├── RPI_Oppg_7_V2.puml     # UML-diagram
+├── requirements.txt       # Python-avhengigheter
 └── README.md
 ```
 
@@ -63,7 +65,7 @@ Meldinger pakkes i `<` `>` med kommaseparerte verdier:
 ### 1. Installer avhengigheter (RPi)
 
 ```bash
-pip3 install customtkinter matplotlib pyserial --break-system-packages
+pip3 install -r requirements.txt --break-system-packages
 ```
 
 ### 2. Flash AVR
@@ -81,7 +83,7 @@ Kompiler, koble til ledning og last opp via Microchip Studio
 ### 4. Kjør
 
 ```bash
-python3 Oppg_7_GUI_V2.py
+python3 RPI_Oppg_7_V2.py
 ```
 
 > 💡 Starter automatisk i **demo-modus** hvis seriellporten ikke er tilgjengelig.

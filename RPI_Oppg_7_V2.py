@@ -12,6 +12,8 @@ import customtkinter as ctk
 import serial
 import time
 import math
+import random
+from collections import deque
 
 # Matplotlib i tkinter
 from matplotlib.figure import Figure
@@ -21,6 +23,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 try:
     ser = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=2)
     time.sleep(0.1)
+    ser.reset_input_buffer()
     SERIAL_OK = True
 except Exception as e:
     print(f"Kunne ikke åpne seriellport: {e}")
@@ -31,12 +34,15 @@ except Exception as e:
 def send_cmd(cmd, verdi):
     if not SERIAL_OK:
         if cmd == 'M':
-            import random
             return str(random.randint(0, 4095))
         return "DEMO"
     melding = f"<{cmd},{verdi}>"
     ser.write(melding.encode())
-    return ser.readline().decode().strip()
+    ser.flush()
+    try:
+        return ser.readline().decode().strip()
+    except (UnicodeDecodeError, serial.SerialException):
+        return "FEIL"
 
 
 # ---- LED-klasse ----
@@ -54,20 +60,23 @@ class LED:
         return send_cmd('L', f'{self.nr},{int(self.state)}')
 
 
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
+
+
 # ---- GUI ----
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("IO-kort kontroll")
         self.geometry("520x850")
-        ctk.set_appearance_mode("dark")
-        ctk.set_default_color_theme("blue")
 
+        self.protocol("WM_DELETE_WINDOW", self._on_close)
         self.leds = [LED(i) for i in range(4)]
         self.sekvens_aktiv = False  # for LED-sekvenser
         self.adc_logging = False    # for live ADC-graf
-        self.adc_data = []
         self.adc_max_punkter = 50
+        self.adc_data = deque(maxlen=self.adc_max_punkter)
 
         self._bygg_led_panel()
         self._bygg_servo_panel()
@@ -97,12 +106,12 @@ class App(ctk.CTk):
             btn.grid(row=0, column=i, padx=5)
             self.led_btns.append(btn)
 
-        # Alle av/pÃ¥ + sekvenser
+        # Alle av/på + sekvenser
         ctrl_frame = ctk.CTkFrame(frame, fg_color="transparent")
         ctrl_frame.pack(pady=(4, 8))
 
         ctk.CTkButton(
-            ctrl_frame, text="Alle PÃ…", width=100,
+            ctrl_frame, text="Alle PÅ", width=100,
             fg_color="green", hover_color="darkgreen",
             command=lambda: self._alle_led(True)
         ).grid(row=0, column=0, padx=4)
@@ -246,7 +255,7 @@ class App(ctk.CTk):
             yt = cy - (r + 14) * math.sin(rad)
             c.create_text(xt, yt, text=str(deg), fill="#999999", font=("", 8))
 
-        # NÃ¥l
+        # Nål
         rad = math.radians(180 - vinkel)
         nx = cx + (r - 15) * math.cos(rad)
         ny = cy - (r - 15) * math.sin(rad)
@@ -279,7 +288,7 @@ class App(ctk.CTk):
         btn_frame.pack(pady=4)
 
         ctk.CTkButton(
-            btn_frame, text="Les Ã©n gang", width=110,
+            btn_frame, text="Les én gang", width=110,
             command=self._les_adc
         ).grid(row=0, column=0, padx=5)
 
@@ -291,7 +300,7 @@ class App(ctk.CTk):
         self.log_btn.grid(row=0, column=1, padx=5)
 
         ctk.CTkButton(
-            btn_frame, text="TÃ¸m graf", width=90,
+            btn_frame, text="Tøm graf", width=90,
             fg_color="gray30",
             command=self._tom_graf
         ).grid(row=0, column=2, padx=5)
@@ -326,8 +335,6 @@ class App(ctk.CTk):
         self.adc_label.configure(text=f"Verdi: {svar}")
         try:
             self.adc_data.append(int(svar))
-            if len(self.adc_data) > self.adc_max_punkter:
-                self.adc_data.pop(0)
             self._oppdater_graf()
         except ValueError:
             pass
@@ -354,6 +361,13 @@ class App(ctk.CTk):
         self._oppdater_graf()
         self._sett_status("ADC-graf tømt")
 
+    def _on_close(self):
+        self.sekvens_aktiv = False
+        self.adc_logging = False
+        if SERIAL_OK:
+            ser.close()
+        self.destroy()
+
     # ============================================================
     # Statuslinje
     # ============================================================
@@ -368,5 +382,3 @@ class App(ctk.CTk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-    if SERIAL_OK:
-        ser.close()
