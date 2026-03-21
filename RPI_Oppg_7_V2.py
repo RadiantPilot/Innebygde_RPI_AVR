@@ -1,11 +1,11 @@
 """
 GUI for styring av IO-kort (AVR) via USART fra Raspberry Pi.
-Oppgave 7 â€“ AUT-2606 Innebygde Systemer (oppgradert)
+Oppgave 7 – AUT-2606 Innebygde Systemer (oppgradert)
 
 Protokoll: <cmd,verdi>
-  L,led_nr,on_off  â€“ LED-styring (0-3, 0/1)
-  S,vinkel          â€“ Servo (0-180)
-  M,0               â€“ Les ADC-verdi
+  L,led_nr,on_off  – LED-styring (0-3, 0/1)
+  S,vinkel          – Servo (0-180)
+  M,0               – Les ADC-verdi
 """
 
 import customtkinter as ctk
@@ -23,8 +23,8 @@ try:
     time.sleep(0.1)
     SERIAL_OK = True
 except Exception as e:
-    print(f"Kunne ikke Ã¥pne seriellport: {e}")
-    print("KjÃ¸rer i demo-modus (ingen HW-tilkobling)")
+    print(f"Kunne ikke åpne seriellport: {e}")
+    print("Kjører i demo-modus (ingen HW-tilkobling)")
     SERIAL_OK = False
 
 
@@ -133,19 +133,19 @@ class App(ctk.CTk):
         self.leds[idx].toggle()
         self._oppdater_led_btn(idx)
         on = self.leds[idx].state
-        self._sett_status(f"LED {idx} â†’ {'PÃ…' if on else 'AV'}")
+        self._sett_status(f"LED {idx} → {'PÅ' if on else 'AV'}")
 
     def _alle_led(self, on):
         self._stopp_sekvens()
         for i in range(4):
             self.leds[i].set(on)
             self._oppdater_led_btn(i)
-        self._sett_status(f"Alle LED â†’ {'PÃ…' if on else 'AV'}")
+        self._sett_status(f"Alle LED → {'PÅ' if on else 'AV'}")
 
     def _oppdater_led_btn(self, idx):
         on = self.leds[idx].state
         self.led_btns[idx].configure(
-            text=f"LED {idx}\n{'PÃ…' if on else 'AV'}",
+            text=f"LED {idx}\n{'PÅ' if on else 'AV'}",
             fg_color="green" if on else "gray30"
         )
 
@@ -205,7 +205,7 @@ class App(ctk.CTk):
                                            bg="#2b2b2b", highlightthickness=0)
         self.servo_canvas.pack(pady=(4, 2))
 
-        self.vinkel_label = ctk.CTkLabel(frame, text="Vinkel: 90Â°", font=("", 14))
+        self.vinkel_label = ctk.CTkLabel(frame, text="Vinkel: 90°", font=("", 14))
         self.vinkel_label.pack()
 
         self.slider = ctk.CTkSlider(
@@ -255,13 +255,13 @@ class App(ctk.CTk):
 
     def _slider_endret(self, val):
         v = int(val)
-        self.vinkel_label.configure(text=f"Vinkel: {v}Â°")
+        self.vinkel_label.configure(text=f"Vinkel: {v}°")
         self._tegn_servo(v)
 
     def _send_servo(self):
         vinkel = int(self.slider.get())
         svar = send_cmd('S', str(vinkel))
-        self._sett_status(f"Servo â†’ {vinkel}Â°  (AVR: {svar})")
+        self._sett_status(f"Servo → {vinkel}°  (AVR: {svar})")
 
     # ============================================================
     # ADC-panel med live graf
@@ -272,7 +272,7 @@ class App(ctk.CTk):
 
         ctk.CTkLabel(frame, text="ADC-lesing", font=("", 16, "bold")).pack(pady=(8, 2))
 
-        self.adc_label = ctk.CTkLabel(frame, text="Verdi: â€“", font=("", 20))
+        self.adc_label = ctk.CTkLabel(frame, text="Verdi: –", font=("", 20))
         self.adc_label.pack()
 
         btn_frame = ctk.CTkFrame(frame, fg_color="transparent")
@@ -331,7 +331,7 @@ class App(ctk.CTk):
             self._oppdater_graf()
         except ValueError:
             pass
-        self._sett_status(f"ADC â†’ {svar}")
+        self._sett_status(f"ADC → {svar}")
 
     def _toggle_logging(self):
         self.adc_logging = not self.adc_logging
@@ -352,7 +352,7 @@ class App(ctk.CTk):
     def _tom_graf(self):
         self.adc_data.clear()
         self._oppdater_graf()
-        self._sett_status("ADC-graf tÃ¸mt")
+        self._sett_status("ADC-graf tømt")
 
     # ============================================================
     # Statuslinje

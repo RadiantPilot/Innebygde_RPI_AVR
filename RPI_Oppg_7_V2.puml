@@ -1,0 +1,60 @@
+@startuml
+' UML for RPI_Oppg_7_V2.py
+
+class LED {
+  - nr: int
+  - state: bool
+  + __init__(nr)
+  + toggle()
+  + set(on)
+}
+
+class App {
+  - leds: list[LED]
+  - sekvens_aktiv: bool
+  - adc_logging: bool
+  - adc_data: list[int]
+  - adc_max_punkter: int
+  - ser: serial.Serial (global)
+  - SERIAL_OK: bool (global)
+
+  + __init__()
+  + _bygg_led_panel()
+  + _toggle_led(idx)
+  + _alle_led(on)
+  + _oppdater_led_btn(idx)
+  + _start_sekvens(valg)
+  + _stopp_sekvens()
+  + _knight_rider(pos, retning)
+  + _blink_alle(on)
+  + _annenhver(fase)
+  + _bygg_servo_panel()
+  + _tegn_servo(vinkel)
+  + _slider_endret(val)
+  + _send_servo()
+  + _bygg_adc_panel()
+  + _stil_graf()
+  + _oppdater_graf()
+  + _les_adc()
+  + _toggle_logging()
+  + _log_loop()
+  + _tom_graf()
+  + _bygg_status()
+  + _sett_status(tekst)
+}
+
+App "1" -- "*" LED : contains >
+
+note right of App
+  - Bruker customtkinter for GUI
+  - Kommuniserer mot AVR via send_cmd
+  - Har LED, servo og ADC panel
+end note
+
+note left
+  send_cmd(cmd, verdi) global funksjon
+  - DEMO modus hvis seriell ikke OK
+  - Normal: send via <cmd,verdi>
+end note
+
+@enduml
