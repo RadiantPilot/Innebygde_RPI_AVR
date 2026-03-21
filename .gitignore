@@ -1,0 +1,5 @@
+# PlantUML - ikke synlig på GitHub
+*.puml
+
+# Virtuelt miljø
+.venv/
