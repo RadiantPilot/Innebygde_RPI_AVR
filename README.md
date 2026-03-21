@@ -3,7 +3,7 @@
 # ⚡ IO-kort kontroll
 
 **AUT-2606 Innebygde Systemer — UiT Norges Arktiske Universitet**<br>
-*Skrevet i tråd med UiT sitt KI nivå 4*
+*Skrevet i tråd med UiT sitt KI nivå 4*  
 ![Platform](https://img.shields.io/badge/platform-Raspberry%20Pi-c51a4a?logo=raspberrypi&logoColor=white)
 ![MCU](https://img.shields.io/badge/MCU-AVR128DB-0066cc?logo=microchip&logoColor=white)
 ![Language](https://img.shields.io/badge/GUI-Python%203-3776ab?logo=python&logoColor=white)
