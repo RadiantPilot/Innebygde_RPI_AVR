@@ -103,7 +103,7 @@ python3 RPI_Oppg_7_V2.py
 ## 🔧 Endringer fra original kode
 
 <details>
-<summary><b>Servo — øker fra 90° bevegelse til 180</b></summary>
+<summary><b>Servo — øker fra 90° bevegelse til 180° </b></summary>
 
 Originale verdier `SERVO_MIN=62`, `SERVO_MAX=125` ga pulser 1.0–2.0ms.
 Mange servoer trenger 0.5–2.5ms for fulle 180°.
